@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='../base/react.min.js'></script>
+    <script src="../base/react-dom.min.js"></script>
+    <script src="../base/browser.min.js"></script>
+    <style>
+        span{
+            display: block;
+            float: left;
+            height: 30px;
+            width: 50px;
+            background: #ccc;
+            margin-left: 40px;
+            line-height: 30px;
+            text-align: center;
+        }
+        .mai{
+            height: 300px;
+            float: left;
+            width: 300px;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        let Wbox = React.createClass({
+            getInitialState(){
+                return{
+                    list:[{id:'恐怖',data:['咒怨','山村老师','恐怖的杨丹丹'],sel:true},
+                        {id:'科幻',data:['复仇者杨丹丹','黑衣人杨丹丹','x战警之杨丹丹的崛起'],sel:false},
+                        {id:'喜剧',data:['一路向西','西红柿首富','贞子大战杨丹丹'],sel:false}],
+                    
+                }
+            },
+            componentDidMount(){
+                let list=this.state.list
+                this.setState({list:list})
+            },
+            adds(index){
+                let list=this.state.list[index]
+                let sel=list.sel
+                sel=true
+                this.setState({list:list})
+            },
+            render(){
+                let {state}=this
+                return(
+                    <div>
+                        <Wnav list={state.list} adds={this.adds}></Wnav>
+                        <Wmain list={state.list}></Wmain>
+                    </div>
+                )
+            }
+        })
+        let Wnav=React.createClass({
+            render(){
+                let {props}=this
+                return(
+                    <div>
+                        {props.list.map((item,index)=>{
+                            return(
+                                <span onClick={this.props.adds.bind(this,index)}>{item.id}</span>
+                            )
+                        })} 
+                    </div>
+                )
+            }
+        })
+        let Wmain=React.createClass({
+            render(){
+                let {props}=this
+                return(
+                    <div>
+                        {props.list.map((item,index)=>{
+                            return(
+                                item.sel?<div className='mai'>
+                                    {item.data.map((datas,indexs)=>{
+                                        return(
+                                            <div>{datas}</div>
+                                        )
+                                    })}    
+                                </div>:''
+                            )
+                        })} 
+                    </div>
+                )
+            }
+        })
+        ReactDOM.render(<Wbox/>,app)
+    </script>
+</body>
+</html>
