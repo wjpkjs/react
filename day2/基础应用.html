@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../base/react.min.js"></script>
+    <script src="../base/react-dom.min.js"></script>
+    <script src="../base/browser.min.js"></script>
+    <style>
+        .see{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        let Wdemo=React.createClass({
+            list:[1,2,3,4,5,6],
+            sel:true,
+            num:0,
+            render(){
+                console.log(this.num)
+                return(
+                    <div>
+                        <div>{this.num}</div>
+                        {this.list.map((item)=>{
+                            if(item%2==this.num){
+                                this.sel=false
+                            }else{
+                                this.sel=true
+                            }
+                            return this.sel?<li className='see'>{item}</li>:''
+                        })}
+                        <button onClick={this.text}>切换</button>
+                    </div>
+                )
+            },
+            text(){
+                if(this.num==0){
+                    this.num=1
+                }else{
+                    this.num=0
+                }
+                this.render()
+            }
+        })
+        ReactDOM.render(<Wdemo/>,app)
+    </script>
+</body>
+</html>

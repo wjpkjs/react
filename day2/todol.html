@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='../base/react.min.js'></script>
+    <script src="../base/react-dom.min.js"></script>
+    <script src="../base/browser.min.js"></script>
+    <style>
+        .li1{
+            margin-top: 5px;
+            height: 30px;
+            width: 360px;
+        }
+        span{
+            margin-left: 10px;
+            float: left;
+            text-align: center;
+            line-height: 30px;
+        }
+        .span1{
+            display: block;
+            height: 30px;
+            width: 50px;
+            background: red;
+            color: #fff;
+            float: right;
+        }
+        .over{
+            background: green;
+            display: block;
+            height: 30px;
+            width: 50px;
+            color: #fff;
+            font-size: 14px;
+            float: right;
+        }
+        .overs{
+            background: rgb(151, 16, 133);
+            display: block;
+            height: 30px;
+            width: 50px;
+            color: #fff;
+            font-size: 14px;
+            float: right;
+        }
+        .span2{
+            background: rgb(185, 214, 21);
+            display: block;
+            height: 30px;
+            width: 50px;
+            color: #fff;
+            font-size: 14px;
+            float: right;
+        }
+        .ali{
+            position: fixed;
+            top: 100px;
+            left: 35px;
+            height: 100px;
+            width: 300px;
+            background: #ccc;
+            z-index: 5;
+            line-height: 100px;
+            text-align: center;
+            border-radius: 20px;
+        }
+        .inp1{
+            height: 30px;
+        }
+        .but{
+            height: 30px;
+            width: 50px;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script type="text/babel">
+        let Wbox = React.createClass({
+            getInitialState(){
+                return{
+                    list:[{txt:'mag',fin:false},
+                        {txt:'mag',fin:true}],
+                    sel:false,
+                    index:0
+                }
+            },
+            addData(mag){
+                let list=this.state.list
+                list.push({txt:mag,fin:false})
+                this.setState({list:list})
+            },
+            del(index){
+                let list=this.state.list
+                list.splice(index,1)
+                this.setState({list:list})
+            },
+            finf(index){
+                let list=this.state.list
+                list[index].fin=!list[index].fin
+                this.setState({list:list})
+            },
+            updata(index,mag){
+                let list=this.state.list
+                let sel=this.state.sel
+                sel=!sel
+                list[index].txt=mag
+                this.setState({list:list,sel:sel})
+            },
+            sell(indexs){
+                let sel=this.state.sel
+                let index=this.state.index
+                sel=!sel
+                index=indexs
+                this.setState({index:index,sel:sel})
+            },
+            render(){
+                let {state}=this
+                return(
+                    <div>
+                        <Wint addData={this.addData}></Wint>
+                        <Wmain list={state.list} sel={state.sel} index={state.index} del={this.del} finf={this.finf} updata={this.updata} sell={this.sell}></Wmain>
+                    </div>
+                )
+            }
+        })
+        let Wint = React.createClass({
+            add(){
+                let mag=this.refs.input.value
+                this.props.addData(mag)
+            },
+            render(){
+                return(
+                    <div>
+                        <input type="text" ref='input'/>
+                        <button onClick={this.add}>添加</button>
+                    </div>
+                )
+            }
+        })
+        let Wmain = React.createClass({
+            initdata(data){
+                if(!data.length){
+                    return <div>暂无待办事项</div>
+                }
+                return(
+                    data.map((item,index)=>{
+                        return (
+                            <div className='li1'>
+                                <span>{item.txt}</span>
+                                <span className='span1' onClick={this.props.del.bind(this,index)}>删除</span>
+                                <span className={item.fin?'over':'overs'} onClick={this.props.finf.bind(this,index)}>{item.fin?'已完成':'未完成'}</span>
+                                <span className='span2' onClick={this.props.sell.bind(this,index)}>修改</span>
+                            </div>
+                        )
+                    })
+                )
+            },
+            updatas(index){
+                let mag=this.refs.inp11.value
+                this.props.updata(index,mag)
+            },
+            render(){
+                let {props}=this
+                return(
+                    <div>
+                        {this.initdata(props.list)} 
+                        {props.sel?<div className='ali'>
+                                        <input className='inp1' type="text" ref='inp11'/>
+                                        <button className='but' onClick={this.updatas.bind(this,props.index)}>确认</button>
+                                        <button className='but' onClick={this.props.sell}>取消</button>
+                                    </div>:''}   
+                    </div>
+                )
+            }
+        })
+        ReactDOM.render(<Wbox/>,app)
+    </script>
+</body>
+</html>
