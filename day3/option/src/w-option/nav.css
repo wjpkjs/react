@@ -1,0 +1,20 @@
+.nav-span1{
+    height: 30px;
+    width: 50px;
+    margin-left: 20px;
+    display: block;
+    float: left;
+    line-height: 30px;
+    text-align: center;
+}
+.nav-span{
+    height: 30px;
+    width: 50px;
+    margin-left: 20px;
+    display: block;
+    float: left;
+    line-height: 30px;
+    text-align: center;
+    background: red;
+    color: aliceblue;
+}
