@@ -1,0 +1,39 @@
+.list-span1{
+    display: block;
+    height: 30px;
+    width: 50px;
+    text-align: center;
+    line-height: 30px;
+    float: right;
+    margin-right: 10px;
+}
+.list-span2{
+    display: block;
+    height: 30px;
+    width: 50px;
+    text-align: center;
+    line-height: 30px;
+    float: right;
+    margin-right: 10px;
+    background: green;
+    color: aliceblue
+}
+.list-span3{
+    display: block;
+    height: 30px;
+    width: 50px;
+    text-align: center;
+    line-height: 30px;
+    float: right;
+    margin-right: 10px;
+    background: red;
+    color: aliceblue
+}
+li{
+    display: block;
+    height: 30px;
+    width: 350px;
+    line-height: 30px;
+    margin-top: 10px;
+    font-size: 14px;
+}
